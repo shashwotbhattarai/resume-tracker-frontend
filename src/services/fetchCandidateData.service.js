@@ -30,7 +30,7 @@ export async function fetchOneCandidateData(authToken) {
         headers: { Authorization: `Bearer ${authToken}` },
       },
     );
-    const candidates = response.data.candidate;
+    const candidates = response.data.data;
     const url = response.data.url;
     return {
       status: 200,

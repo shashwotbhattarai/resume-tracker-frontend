@@ -2,7 +2,7 @@ import axios from "axios";
 import { ROUTES } from "../config/routes/constants";
 export async function downloadCandidateData(selectedCandidate, authToken) {
   try {
-    const awsFileKey = selectedCandidate.aws_file_key;
+    const awsFileKey = selectedCandidate.s3_default_bucket_file_key;
 
     const downloadResponse = await axios.post(
       `${ROUTES.RECRUITER_MICROSERVICE_URL}/recruiter/download`,

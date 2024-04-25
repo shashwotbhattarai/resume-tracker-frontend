@@ -134,7 +134,7 @@ const Upload = () => {
                 value={formData.fullname || ""}
                 onChange={handleInputChangeForFullName}
                 minLength="3"
-                pattern="[A-Za-z]+$"
+                pattern="^[A-Za-z]+(?: [A-Za-z]+)*$"
                 title="Fullname must contain only letters."
                 required
               />
