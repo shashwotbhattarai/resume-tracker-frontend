@@ -11,7 +11,7 @@ export async function uploadCandidateInfo(formData, token) {
         phone_number: formData.phone_number,
       };
       const response = await axios.post(
-        `${ROUTES.CANDIDATE_MICROSERVICE_URL}/saveCandidateInfo`,
+        `${ROUTES.CANDIDATE_MICROSERVICE_URL}/candidateInfo/saveCandidateInfo/`,
         data,
         {
           headers: {
@@ -22,7 +22,7 @@ export async function uploadCandidateInfo(formData, token) {
 
       const key = Date.now() + "_" + formData.cv.name;
       const urlResponse = await axios.get(
-        `${ROUTES.CANDIDATE_MICROSERVICE_URL}/defaultUploadUrl`,
+        `${ROUTES.CANDIDATE_MICROSERVICE_URL}/s3/getDefaultUploadUrl`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ export async function uploadCandidateInfo(formData, token) {
 
       if (s3uploadResponse.status !== 200) {
         const badBucketUrlResponse = await axios.get(
-          `${ROUTES.CANDIDATE_MICROSERVICE_URL}/badbucketUploadURL`,
+          `${ROUTES.CANDIDATE_MICROSERVICE_URL}/s3/getBadbucketUploadURL`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ export async function uploadCandidateInfo(formData, token) {
         const bucket = "default";
 
         await axios.post(
-          `${ROUTES.CANDIDATE_MICROSERVICE_URL}/saveCandidateInfo/updateS3FileKey`,
+          `${ROUTES.CANDIDATE_MICROSERVICE_URL}/candidateInfo/updateS3FileKey`,
           {},
 
           {
@@ -91,7 +91,7 @@ export async function uploadCandidateInfo(formData, token) {
       ) {
         const bucket = "bad";
         await axios.post(
-          `${ROUTES.CANDIDATE_MICROSERVICE_URL}/saveCandidateInfo/updateS3FileKey`,
+          `${ROUTES.CANDIDATE_MICROSERVICE_URL}/candidateInfo/updateS3FileKey`,
           {},
 
           {
@@ -119,11 +119,15 @@ export async function uploadCandidateInfo(formData, token) {
         email: formData.email,
         phone_number: formData.phone_number,
       };
-      await axios.post(`http://localhost:4000/saveCandidateInfo`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await axios.post(
+        `${ROUTES.CANDIDATE_MICROSERVICE_URL}/candidateInfo/saveCandidateInfo/`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       return {
         status: 200,

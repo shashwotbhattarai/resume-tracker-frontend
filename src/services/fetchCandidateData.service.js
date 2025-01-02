@@ -9,7 +9,7 @@ export async function fetchAllCandidateData(authToken) {
         headers: { Authorization: `Bearer ${authToken}` },
       },
     );
-    const candidates = response.data;
+    const candidates = response.data.candidates;
     return {
       status: 200,
       message: "Candidate data fetched successfully",
@@ -25,7 +25,7 @@ export async function fetchOneCandidateData(authToken) {
     const decoded = jwtDecode(authToken);
     const user_id = decoded.user_id;
     const response = await axios.get(
-      `${ROUTES.CANDIDATE_MICROSERVICE_URL}/getCandidateInfo/${user_id}`,
+      `${ROUTES.CANDIDATE_MICROSERVICE_URL}/candidateInfo/getCandidateInfo/${user_id}`,
       {
         headers: { Authorization: `Bearer ${authToken}` },
       },

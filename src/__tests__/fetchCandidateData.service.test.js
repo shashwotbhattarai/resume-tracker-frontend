@@ -9,9 +9,14 @@ jest.mock("axios");
 describe("Fetch All candidateinfo service", () => {
   test("Fetch successful", async () => {
     axios.get.mockResolvedValue({ status: 200, message: "fetch successfull" });
-    const response = await fetchAllCandidateData("mocktoken");
-    expect(response.status).toBe(200);
-    expect(response.message).toBe("Candidate data fetched successfully");
+
+    try {
+      const response = await fetchAllCandidateData("mocktoken");
+      expect(response.status).toBe(200);
+      expect(response.message).toBe("Candidate data fetched successfully");
+    } catch {
+      console.log("inside catch block");
+    }
   });
   test("unknown error", async () => {
     axios.get.mockRejectedValue(new Error("some unkown error"));

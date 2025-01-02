@@ -24,3 +24,5 @@ yarn-error.log*
 
 .env
 .scannerwork
+
+.DS_Store

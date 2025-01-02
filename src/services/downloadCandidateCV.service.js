@@ -4,9 +4,8 @@ export async function downloadCandidateData(selectedCandidate, authToken) {
   try {
     const awsFileKey = selectedCandidate.s3_default_bucket_file_key;
 
-    const downloadResponse = await axios.post(
-      `${ROUTES.RECRUITER_MICROSERVICE_URL}/recruiter/download`,
-      { key: awsFileKey },
+    const downloadResponse = await axios.get(
+      `${ROUTES.RECRUITER_MICROSERVICE_URL}/recruiter/getCandidateInfo/cv/${awsFileKey}`,
       { headers: { Authorization: `Bearer ${authToken}` } },
     );
 
