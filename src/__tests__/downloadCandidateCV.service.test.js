@@ -9,14 +9,13 @@ describe("Download candidate service", () => {
       message: "download successfull",
       data: { url: "some url" },
     });
-    try{
+    try {
       const response = await downloadCandidateData("mocktoken");
       expect(response.status).toBe(200);
       expect(response.message).toBe("Candidate data downloaded successfully");
-    }catch{
-      console.log("inside catch block")
+    } catch {
+      console.log("inside catch block");
     }
-   
   });
   test("Error", async () => {
     axios.get.mockResolvedValue({
